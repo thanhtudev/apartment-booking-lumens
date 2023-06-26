@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Booking } from './bookings.entity';
 import { Room } from '../rooms/rooms.entity';
 import { Customer } from '../customers/customers.entity';
-import { Repository } from 'typeorm';
+import { Repository, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 
 @Injectable()
 export class BookingsService {
@@ -27,7 +27,22 @@ export class BookingsService {
 
     for (const bookingData of bookings) {
       const { roomId, start_date, end_date } = bookingData;
+      // Validate start_date
+      const startDateObj = new Date(start_date);
+      if (isNaN(startDateObj.getTime())) {
+        return `Invalid start date: ${start_date}`;
+      }
 
+      // Validate end_date
+      const endDateObj = new Date(end_date);
+      if (isNaN(endDateObj.getTime())) {
+        return `Invalid end date: ${end_date}`;
+      }
+
+      // Check if end_date is earlier than start_date
+      if (endDateObj < startDateObj) {
+        return 'End date cannot be earlier than start date';
+      }
 
       const room = await this.roomRepository.findOneBy({ id: roomId });
 
@@ -38,8 +53,8 @@ export class BookingsService {
       const existingBooking = await this.bookingRepository.findOne({
         where: {
           room_id: roomId,
-          end_date: end_date,
-          start_date: start_date,
+          start_date: LessThanOrEqual(end_date),
+          end_date: MoreThanOrEqual(start_date),
         },
       });
 
