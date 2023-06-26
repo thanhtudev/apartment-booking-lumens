@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  backend:
+    build: ./
+    container_name: booking-app
+    environment:
+      - PORT=4000
+      - DB_TYPE=postgres
+      - DB_HOST=booking-db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=booking
+      - JWT_EXPIRY_TIME=30d
+      - JWT_SECRET=ba7b0fda2d6ca649ed5ce1f6cd47da2e7609c3915944608b35d79d5450fca62a8526b2e0e858d6a5
+      - SECRET_KEY=54811fc8e813283936bfd9255c1e8c0e278ea858
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+    networks:
+      - booking-network
+  db:
+    image: postgres:13.1-alpine
+    restart: always
+    container_name: booking-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=booking
+    ports:
+      - 5432:5432
+    networks:
+      - booking-network
+
+networks:
+  booking-network:
+    driver: bridge
