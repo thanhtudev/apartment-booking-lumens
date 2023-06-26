@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "23ef0b16-c89a-4f7e-8417-e2249745fe30",
+		"name": "apartment-booking-lumens",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25909865"
+	},
+	"item": [
+		{
+			"name": "List Customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Rooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/rooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Available Rooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/rooms/available-rooms?page=1&limit=10&start_date=2023-08-12&end_date=2022-08-15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"rooms",
+						"available-rooms"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "start_date",
+							"value": "2023-08-12"
+						},
+						{
+							"key": "end_date",
+							"value": "2022-08-15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booking Detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/bookings/{{booking_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"bookings",
+						"{{booking_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerId\": 1,\r\n  \"bookings\": [\r\n    {\r\n      \"roomId\": 5,\r\n      \"start_date\": \"2023-06-28\",\r\n      \"end_date\": \"2023-07-05\"\r\n    },\r\n    {\r\n      \"roomId\": 8,\r\n      \"start_date\": \"2023-07-01\",\r\n      \"end_date\": \"2023-07-07\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/bookings/book-multiple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"bookings",
+						"book-multiple"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "booking_id",
+			"value": "booking_id}"
+		}
+	]
+}
