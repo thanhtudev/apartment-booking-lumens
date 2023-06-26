@@ -71,7 +71,12 @@ export class BookingsService {
       newBookings.push(newBooking);
     }
 
-    return await this.bookingRepository.save(newBookings);
+    try {
+      const savedBookings = await this.bookingRepository.save(newBookings);
+      return savedBookings;
+    } catch (error) {
+      return `Error saving bookings: ${error.message}`;
+    }
   }
 
   async getBookingById(id: number) {
