@@ -59,3 +59,53 @@ $ npm run start:prod
 
 Url: http://localhost:4000
 
+
+## Apartment Booking Lumens API
+
+This API collection provides endpoints for managing apartment bookings and related entities.
+
+### List Customer
+
+- **Endpoint**: GET /customers
+- **Description**: Retrieves a list of all customers.
+- **Response**: No response details provided.
+
+### List All Rooms
+
+- **Endpoint**: GET /rooms
+- **Description**: Retrieves a list of all rooms.
+- **Response**: No response details provided.
+
+### List Available Rooms
+
+- **Endpoint**: GET /rooms/available-rooms
+- **Description**: Retrieves a list of available rooms within a specified date range.
+- **Parameters**:
+  - `page` (integer): The page number of results (default: 1)
+  - `limit` (integer): The maximum number of results per page (default: 10)
+  - `start_date` (string): The start date of the availability range (format: YYYY-MM-DD)
+  - `end_date` (string): The end date of the availability range (format: YYYY-MM-DD)
+- **Response**: No response details provided.
+
+### Get Booking Detail
+
+- **Endpoint**: GET /bookings/{{booking_id}}
+- **Description**: Retrieves the details of a specific booking.
+- **Parameters**:
+  - `booking_id` (string): The ID of the booking to retrieve.
+- **Response**: No response details provided.
+
+### Create Booking
+
+- **Endpoint**: POST /bookings/book-multiple
+- **Description**: Creates multiple bookings for a customer.
+- **Request**:
+  - **Body**:
+    - **customerId** (integer): The ID of the customer making the bookings.
+    - **bookings** (array): An array of booking objects containing the following properties:
+      - **roomId** (integer): The ID of the room to book.
+      - **start_date** (string): The start date of the booking (format: YYYY-MM-DD).
+      - **end_date** (string): The end date of the booking (format: YYYY-MM-DD).
+- **Response**: No response details provided.
+
+
